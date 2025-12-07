@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="天赋自测 - 测试结果">
+  <title>测试结果 - 天赋自测</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="page result-page">
+    <div class="container">
+      <!-- 结果标题 -->
+      <div class="result-header">
+        <h1 class="result-title">恭喜完成测试</h1>
+        <p class="result-summary" id="resultSummary">
+          <!-- 动态生成：你最具有xxx、xxx、xxx，然而xxx、xxx、xxx相对较弱 -->
+        </p>
+      </div>
+
+      <!-- 雷达图 -->
+      <div class="radar-section">
+        <h2 class="section-title">天赋能力图</h2>
+        <div class="radar-container">
+          <canvas id="radarChart" width="300" height="300"></canvas>
+        </div>
+      </div>
+
+      <!-- 分值列表 -->
+      <div class="scores-section">
+        <h2 class="section-title">各项天赋分值</h2>
+        <div id="scoresList">
+          <!-- 动态生成分值列表 -->
+        </div>
+      </div>
+
+      <!-- 操作按钮 -->
+      <div class="result-actions">
+        <button class="btn btn-secondary" onclick="goToHome()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+          </svg>
+          <span>返回首页</span>
+        </button>
+        <button class="btn btn-primary" onclick="restartTest()">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+          </svg>
+          <span>重新测试</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 引入题目数据 -->
+  <script src="js/questions.js"></script>
+  <!-- 引入结果计算逻辑 -->
+  <script src="js/result.js"></script>
+</body>
+</html>
+

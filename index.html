@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="探索你的多元智能，发现你的天赋优势">
+  <meta name="keywords" content="天赋测试,多元智能,性格测试,自我认知">
+  <title>天赋测试 - 发现你的多元智能</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="page welcome-page">
+    <div class="page-content">
+      <div class="welcome-content">
+        <!-- 图标 -->
+        <div class="welcome-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg>
+        </div>
+
+        <!-- 标题 -->
+        <h1 class="welcome-title">天赋测试</h1>
+        <p class="welcome-subtitle-en">TALENT ASSESSMENT</p>
+        <p class="welcome-tag">@DeepAI研究室</p>
+
+        <!-- Slogan -->
+        <h2 class="welcome-slogan">每个人都有自己独特的天赋</h2>
+        <p class="welcome-description">
+          通过科学的方式帮你发现自己的10种天赋能力<br>
+          找到最适合的发展方向
+        </p>
+
+        <!-- 版权信息 -->
+        <p class="welcome-copyright">
+          本测试基于加德纳多元智能理论，由专业团队精心设计
+        </p>
+
+        <!-- 特色卡片 -->
+        <div class="welcome-features">
+          <div class="feature-card">
+            <div class="feature-icon-new">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
+              </svg>
+            </div>
+            <div class="feature-title">全面评估</div>
+            <div class="feature-desc">10个维度全面分析</div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-new feature-icon-highlight">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <div class="feature-title">快速测试</div>
+            <div class="feature-desc">仅需5-10分钟</div>
+          </div>
+
+          <div class="feature-card">
+            <div class="feature-icon-new">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div class="feature-title">精准结果</div>
+            <div class="feature-desc">可视化数据展示</div>
+          </div>
+        </div>
+
+        <!-- 测试信息卡片 -->
+        <div class="test-info-card">
+          <div class="test-info-item">
+            <div class="test-info-label">测试题数：</div>
+            <div class="test-info-value">40 题</div>
+          </div>
+          <div class="test-info-divider"></div>
+          <div class="test-info-item">
+            <div class="test-info-label">预计时长：</div>
+            <div class="test-info-value">5-10 分钟</div>
+          </div>
+        </div>
+
+        <!-- 开始按钮 -->
+        <button class="btn btn-primary btn-large" onclick="startTest()">
+          <span>开始测试</span>
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+          </svg>
+        </button>
+
+        <!-- 温馨提示 -->
+        <p class="welcome-tip">
+          请在安静的环境下完成测试，将获得更准确的结果
+        </p>
+
+        <!-- 隐私声明 -->
+        <div class="privacy-notice">
+          <p>测试结果仅供参考</p>
+          <p>本测试不会收集任何个人信息</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 开始测试
+    function startTest() {
+      // 添加点击动画效果
+      const btn = event.target.closest('.btn');
+      btn.style.transform = 'scale(0.95)';
+      
+      setTimeout(() => {
+        window.location.href = 'test.html';
+      }, 150);
+    }
+
+    // 添加页面加载动画
+    document.addEventListener('DOMContentLoaded', () => {
+      document.body.classList.add('fade-in');
+    });
+  </script>
+</body>
+</html>
+

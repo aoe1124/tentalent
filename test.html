@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <meta name="description" content="天赋自测 - 答题进行中">
+  <title>答题中... - 天赋自测</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <div class="page test-page">
+    <!-- 顶部进度条 -->
+    <div class="progress-wrapper">
+      <div class="progress-info">
+        <span class="progress-text" id="progressText">第1题 / 共40题</span>
+        <span class="progress-percentage" id="progressPercentage">0%</span>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar" id="progressBar" style="width: 0%"></div>
+      </div>
+    </div>
+
+    <!-- 题目容器 -->
+    <div class="page-content">
+      <div class="question-container container">
+        <h2 class="question-title" id="questionTitle">题目加载中...</h2>
+        
+        <div class="options-list" id="optionsList">
+          <!-- 选项将通过JavaScript动态生成 -->
+        </div>
+      </div>
+    </div>
+
+    <!-- 底部导航按钮 -->
+    <div class="nav-buttons">
+      <button class="btn btn-secondary" id="prevBtn" onclick="goToPrevQuestion()" disabled>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M11 17l-5-5m0 0l5-5m-5 5h12" />
+        </svg>
+        <span>上一题</span>
+      </button>
+      <button class="btn btn-primary" id="nextBtn" onclick="goToNextQuestion()" disabled>
+        <span id="nextBtnText">下一题</span>
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- 引入题目数据 -->
+  <script src="js/questions.js"></script>
+  <!-- 引入测试逻辑 -->
+  <script src="js/test.js"></script>
+</body>
+</html>
+
