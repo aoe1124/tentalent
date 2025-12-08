@@ -418,7 +418,7 @@ body {
 }
 
 .question-container {
-  padding: var(--spacing-xl) var(--spacing-lg);
+  padding: 12px var(--spacing-lg) var(--spacing-xl);
   animation: fadeInUp 0.35s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -445,7 +445,7 @@ body {
 .options-list {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-md);
   margin-bottom: var(--spacing-3xl);
 }
 
