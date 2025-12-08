@@ -499,24 +499,24 @@ body {
 
 /* ===== 结果页面样式 ===== */
 .result-page {
-  padding: var(--spacing-xl) var(--spacing-lg) 100px;
+  padding: var(--spacing-xl) var(--spacing-lg) var(--spacing-xl);
 }
 
 .result-header {
   text-align: center;
-  margin-bottom: var(--spacing-3xl);
+  margin-bottom: var(--spacing-xl);
 }
 
 .result-title {
-  font-size: var(--font-size-lg);
+  font-size: 22px;
   font-weight: 700;
   color: var(--color-black);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
 }
 
 .result-summary {
   font-size: var(--font-size-base);
-  line-height: 1.8;
+  line-height: 1.7;
   color: var(--color-gray-dark);
 }
 
@@ -531,14 +531,14 @@ body {
 
 /* ===== 雷达图 ===== */
 .radar-section {
-  margin-bottom: var(--spacing-3xl);
+  margin-bottom: var(--spacing-xl);
 }
 
 .section-title {
-  font-size: var(--font-size-md);
+  font-size: 18px;
   font-weight: 600;
   color: var(--color-black);
-  margin-bottom: var(--spacing-lg);
+  margin-bottom: var(--spacing-md);
   text-align: center;
 }
 
@@ -559,34 +559,34 @@ body {
 
 /* ===== 分值列表 ===== */
 .scores-section {
-  margin-bottom: var(--spacing-3xl);
+  margin-bottom: var(--spacing-xl);
 }
 
 .score-item {
   display: flex;
   align-items: center;
-  gap: var(--spacing-md);
-  margin-bottom: var(--spacing-md);
-  padding: var(--spacing-sm);
+  gap: var(--spacing-sm);
+  margin-bottom: 10px;
+  padding: 8px 10px;
   background: var(--color-white);
   border-radius: var(--radius-md);
   box-shadow: var(--shadow-sm);
 }
 
 .score-label {
-  font-size: var(--font-size-base);
+  font-size: 15px;
   font-weight: 600;
   color: var(--color-black);
-  min-width: 100px;
+  min-width: 85px;
   flex-shrink: 0;
 }
 
 .score-bar-wrapper {
   flex: 1;
   position: relative;
-  height: 44px;
+  height: 36px;
   background: var(--color-bg);
-  border-radius: 10px;
+  border-radius: 8px;
   overflow: hidden;
   display: flex;
   align-items: center;
@@ -597,11 +597,11 @@ body {
   left: 0;
   top: 50%;
   transform: translateY(-50%);
-  height: 36px;
-  border-radius: 8px;
+  height: 30px;
+  border-radius: 6px;
   display: flex;
   align-items: center;
-  padding-left: var(--spacing-md);
+  padding-left: 12px;
   transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
@@ -618,7 +618,7 @@ body {
 }
 
 .score-value {
-  font-size: var(--font-size-sm);
+  font-size: 13px;
   font-weight: 700;
   color: var(--color-white);
   position: relative;
@@ -630,29 +630,38 @@ body {
 }
 
 .score-rating {
-  font-size: var(--font-size-sm);
+  font-size: 13px;
   color: var(--color-gray);
-  min-width: 80px;
+  min-width: 70px;
   text-align: right;
   flex-shrink: 0;
 }
 
 /* ===== 结果页按钮 ===== */
 .result-actions {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  padding: var(--spacing-lg);
-  background: var(--color-white);
-  border-top: 1px solid rgba(15, 23, 42, 0.08);
   display: flex;
   gap: var(--spacing-sm);
-  z-index: 99;
+  margin-top: var(--spacing-xl);
+  margin-bottom: var(--spacing-lg);
 }
 
 .result-actions .btn {
   flex: 1;
+}
+
+/* ===== 结果页底部版权 ===== */
+.result-footer {
+  margin-top: var(--spacing-lg);
+  padding-top: var(--spacing-lg);
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  text-align: center;
+}
+
+.result-footer p {
+  font-size: 11px;
+  color: var(--color-gray-light);
+  margin: 4px 0;
+  line-height: 1.5;
 }
 
 /* ===== 响应式设计 - 小屏手机 ===== */

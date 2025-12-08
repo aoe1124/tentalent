@@ -310,20 +310,16 @@ function createScoreItem(item) {
  * 返回首页
  */
 function goToHome() {
-  if (confirm('确定返回首页吗？')) {
-    localStorage.removeItem('testAnswers');
-    window.location.href = 'index.html';
-  }
+  localStorage.removeItem('testAnswers');
+  window.location.href = 'index.html';
 }
 
 /**
  * 重新测试
  */
 function restartTest() {
-  if (confirm('确定要重新测试吗？')) {
-    localStorage.removeItem('testAnswers');
-    localStorage.removeItem('testProgress');
-    window.location.href = 'test.html';
-  }
+  localStorage.removeItem('testAnswers');
+  localStorage.removeItem('testProgress');
+  window.location.href = 'test.html';
 }
 
