@@ -157,11 +157,9 @@ function updateProgress() {
   const progress = ((currentQuestionIndex + 1) / QUESTIONS.length) * 100;
   const progressBar = document.getElementById('progressBar');
   const progressText = document.getElementById('progressText');
-  const progressPercentage = document.getElementById('progressPercentage');
   
   progressBar.style.width = progress + '%';
   progressText.textContent = `第${currentQuestionIndex + 1}题 / 共${QUESTIONS.length}题`;
-  progressPercentage.textContent = Math.round(progress) + '%';
 }
 
 /**
