@@ -381,27 +381,20 @@ body {
   right: 0;
   z-index: 100;
   background: var(--color-white);
-  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
-  padding: var(--spacing-md) var(--spacing-lg);
+  padding: 12px var(--spacing-lg) 10px;
 }
 
 .progress-info {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  margin-bottom: var(--spacing-xs);
+  margin-bottom: 6px;
 }
 
 .progress-text {
   font-size: var(--font-size-sm);
   color: var(--color-gray);
   font-weight: 500;
-}
-
-.progress-percentage {
-  font-size: var(--font-size-xs);
-  color: var(--color-primary);
-  font-weight: 600;
 }
 
 .progress-bar-container {
@@ -421,7 +414,7 @@ body {
 
 /* ===== 测试页面样式 ===== */
 .test-page {
-  padding-top: 80px;
+  padding-top: 60px;
 }
 
 .question-container {
@@ -474,18 +467,6 @@ body {
   -webkit-tap-highlight-color: transparent;
 }
 
-.option-card::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  top: 0;
-  bottom: 0;
-  width: 0;
-  background: var(--color-primary);
-  border-radius: var(--radius-md) 0 0 var(--radius-md);
-  transition: width 0.2s ease;
-}
-
 .option-card:active {
   transform: scale(0.98);
 }
@@ -496,10 +477,6 @@ body {
   color: var(--color-primary);
   box-shadow: var(--shadow-xl);
   transform: translateY(-2px);
-}
-
-.option-card.selected::before {
-  width: 4px;
 }
 
 /* ===== 导航按钮 ===== */
