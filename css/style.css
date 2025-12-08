@@ -133,7 +133,7 @@ body {
   width: 52px;
   height: 52px;
   margin-bottom: 10px;
-  background: var(--color-primary-ultra-light);
+  background: #F3F0FF;
   border-radius: 14px;
   display: flex;
   align-items: center;
@@ -144,7 +144,7 @@ body {
 .welcome-icon svg {
   width: 26px;
   height: 26px;
-  stroke: var(--color-primary);
+  stroke: #9D8AC7;
   stroke-width: 2px;
 }
 
@@ -227,7 +227,7 @@ body {
 .feature-icon-new {
   width: 40px;
   height: 40px;
-  background: var(--color-primary-ultra-light);
+  background: var(--color-gray-ultra-light);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -238,7 +238,7 @@ body {
 .feature-icon-new svg {
   width: 20px;
   height: 20px;
-  stroke: var(--color-primary);
+  stroke: var(--color-gray);
 }
 
 .feature-title {
@@ -366,7 +366,7 @@ body {
 
 .btn-large {
   height: 58px;
-  font-size: 18px;
+  font-size: 20px;
   width: 100%;
   max-width: 440px;
   font-weight: 700;
@@ -812,6 +812,7 @@ body {
   .btn-large {
     max-width: 540px;
     height: 60px;
+    font-size: 20px;
   }
   
   .btn:hover {
