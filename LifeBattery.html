@@ -463,6 +463,27 @@
         .legend-item.m { color: var(--color-m); }
         .legend-item.o { color: var(--color-o); }
         .legend-item.i { color: var(--color-i); }
+        
+        /* Reset Setup Button */
+        .reset-setup-btn {
+            background: transparent;
+            border: 1px solid #333;
+            color: #666;
+            padding: 8px 16px;
+            font-size: 0.75rem;
+            margin-top: 3rem;
+            align-self: center;
+            cursor: pointer;
+            font-family: var(--font-serif);
+            transition: all 0.3s;
+            position: relative;
+            z-index: 10; /* 确保不被遮挡 */
+        }
+        
+        .reset-setup-btn:hover {
+            color: #aaa;
+            border-color: #666;
+        }
 
         @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
@@ -587,6 +608,9 @@
                 <div class="legend-item i"><div class="dot"></div> 创造</div>
             </div>
         </div>
+        
+        <!-- 重置设定按钮 -->
+        <button onclick="resetSystem()" class="reset-setup-btn">重置生日设定</button>
     </div>
 </div>
 
@@ -635,10 +659,35 @@
         dashboard.style.display = 'flex'; 
         calculateStats(dateVal);
     }
+    
+    // 修改：重置系统功能，改为 DOM 操作而非刷新
+    function resetSystem() {
+        if(confirm("确定要重置生日设定吗？")) {
+            localStorage.removeItem(STORAGE_KEY_BIRTHDATE);
+            
+            // 手动切换界面视图
+            dashboard.classList.remove('active');
+            dashboard.style.display = 'none';
+            
+            setupScreen.style.display = 'block';
+            setTimeout(() => setupScreen.classList.add('active'), 10);
+            
+            // 清空输入框以便重新输入
+            birthdateInput.value = '';
+        }
+    }
 
     function calculateStats(birthDateString) {
-        const birthDate = new Date(birthDateString);
+        // 修复日期变多的BUG：统一使用本地时间午夜，消除UTC时区偏移导致的差异
+        // 解析 YYYY-MM-DD
+        const parts = birthDateString.split('-');
+        // new Date(year, monthIndex, day) 创建的是本地时间的午夜 00:00:00
+        const birthDate = new Date(parts[0], parts[1] - 1, parts[2]);
+        
+        // 将"今天"也设为本地时间的午夜 00:00:00，确保只计算完整天数差异
         const today = new Date();
+        today.setHours(0, 0, 0, 0);
+        
         const deathDate = new Date(birthDate);
         deathDate.setFullYear(birthDate.getFullYear() + EXPECTED_AGE);
 
