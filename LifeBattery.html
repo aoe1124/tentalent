@@ -2,524 +2,397 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>向死而生 | Memento Mori</title>
-    <!-- 引入更有质感的字体 -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400&family=Noto+Serif+SC:wght@300;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600&family=Lato:wght@300;400;700&family=Noto+Serif+SC:wght@300;500;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-dark: #050505;
-            --bg-gradient: radial-gradient(circle at 50% 0%, #1a1a1a 0%, #050505 80%);
-            --text-main: #e0e0e0;
-            --text-muted: #666;
+            --bg-dark: #000000;
+            --bg-card: #121212;
+            --text-main: #f0f0f0;
+            --text-muted: #888;
             --accent: #fff;
-            --border-dim: rgba(255, 255, 255, 0.1);
-            --glass: rgba(255, 255, 255, 0.03);
-            --glass-hover: rgba(255, 255, 255, 0.06);
             
-            /* 分类颜色 - 提亮以增强可读性 */
-            --color-m: #b0b0b0;  /* 生存 - 亮银灰 */
-            --color-o: #9ac3ff;  /* 进化 - 亮天蓝 */
-            --color-i: #ffdb8e;  /* 创造 - 亮淡金 */
+            /* 功能色 - 高对比度 */
+            --color-m: #d1d1d1;  /* 生存 - 银白 */
+            --color-o: #89b4fa;  /* 进化 - 亮蓝 */
+            --color-i: #f9e2af;  /* 创造 - 亮金 */
 
-            /* 字体设置 - 中文优先 */
-            --font-display: 'Noto Serif SC', serif; /* 标题改用衬线中文 */
+            /* 字体 */
+            --font-display: 'Noto Serif SC', serif;
             --font-serif: "Noto Serif SC", serif;
-            --font-sans: 'Lato', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-            --font-mono: 'SF Mono', 'Courier New', monospace;
-            --font-en-deco: 'Cinzel', serif; /* 保留少量装饰性英文数字字体 */
+            --font-sans: 'Lato', -apple-system, Helvetica, sans-serif;
+            --font-num: 'Cinzel', serif;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent; /* 移除点击高亮 */
         }
 
         body {
-            background: var(--bg-dark);
-            background-image: var(--bg-gradient);
+            background-color: var(--bg-dark);
             color: var(--text-main);
             font-family: var(--font-sans);
             display: flex;
-            justify-content: center;
+            flex-direction: column;
+            align-items: center;
             min-height: 100vh;
-            padding: 60px 20px;
-            line-height: 1.6;
-            -webkit-font-smoothing: antialiased;
+            padding: 20px 16px; /* 移动端标准边距 */
+            line-height: 1.5;
         }
 
         .container {
             width: 100%;
-            max-width: 580px;
+            max-width: 480px; /* 限制最大宽度，平板以上居中显示 */
             display: flex;
             flex-direction: column;
-            gap: 3rem;
+            gap: 2rem;
             position: relative;
         }
 
         /* --- Header --- */
         header {
             text-align: center;
-            padding-bottom: 2rem;
-            position: relative;
+            margin-top: 10px;
         }
 
         h1 {
             font-family: var(--font-display);
-            font-size: 2.2rem;
+            font-size: 1.8rem;
             font-weight: 500;
-            letter-spacing: 0.3rem;
-            margin-bottom: 0.5rem;
-            color: #f0f0f0;
-            text-shadow: 0 0 20px rgba(255,255,255,0.1);
+            letter-spacing: 0.2rem;
+            color: #fff;
+            margin-bottom: 0.2rem;
         }
 
         .subtitle {
             color: var(--text-muted);
-            font-size: 0.8rem;
-            font-family: var(--font-en-deco);
+            font-size: 0.75rem;
+            font-family: var(--font-num);
             letter-spacing: 0.1rem;
             opacity: 0.8;
         }
 
-        .divider {
-            width: 1px;
-            height: 40px;
-            background: linear-gradient(to bottom, transparent, #333, transparent);
-            margin: 0 auto 2rem auto;
-        }
-
-        /* --- Setup Screen --- */
+        /* --- Setup Screen (Mobile Optimized) --- */
         .setup-box {
-            background: var(--glass);
-            backdrop-filter: blur(10px);
-            padding: 3rem 2rem;
-            border: 1px solid var(--border-dim);
+            background: var(--bg-card);
+            padding: 2.5rem 1.5rem;
+            border-radius: 16px;
             text-align: center;
             display: none;
-            border-radius: 2px;
-            box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+            border: 1px solid #222;
         }
 
         .setup-box.active {
-            display: block;
-            animation: fadeIn 1.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            animation: fadeIn 0.5s ease;
         }
 
-        .date-input-wrapper {
+        /* 修复移动端 Date Input 的核心样式 */
+        .date-input-container {
             position: relative;
-            display: inline-block;
-            margin-bottom: 20px;
             width: 100%;
+            margin-bottom: 20px;
+            background: #1a1a1a;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid #333;
         }
 
         input[type="date"] {
-            background: rgba(0,0,0,0.3);
-            border: 1px solid #333;
-            color: #fff;
-            padding: 15px;
-            font-family: var(--font-mono);
-            font-size: 1.1rem;
+            display: block;
             width: 100%;
+            padding: 16px;
+            background: transparent;
+            color: #fff;
+            border: none;
+            font-family: var(--font-sans);
+            font-size: 1.1rem;
             text-align: center;
+            appearance: none; /* 移除原生样式 */
+            -webkit-appearance: none;
             outline: none;
-            cursor: pointer;
-            transition: all 0.3s;
-            text-transform: uppercase;
+            min-height: 54px; /* 确保点击区域足够大 */
         }
 
-        input[type="date"]:hover, input[type="date"]:focus {
-            border-color: #555;
-            background: rgba(255,255,255,0.05);
-        }
-
-        /* Webkit Calendar Icon Fix */
-        input[type="date"]::-webkit-calendar-picker-indicator {
-            filter: invert(1) opacity(0.5);
-            cursor: pointer;
+        /* 强制 iOS 显示白色文字 */
+        input[type="date"] {
+            color-scheme: dark; 
         }
 
         button.start-btn {
-            background: #e0e0e0;
-            color: #050505;
+            background: #fff;
+            color: #000;
             border: none;
-            padding: 15px 40px;
+            padding: 16px;
             font-size: 1rem;
-            letter-spacing: 3px;
-            cursor: pointer;
-            transition: all 0.5s ease;
-            font-family: var(--font-display);
-            font-weight: 600;
+            font-weight: 700;
             width: 100%;
+            border-radius: 12px;
+            font-family: var(--font-display);
+            letter-spacing: 2px;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(255,255,255,0.1);
         }
 
-        button.start-btn:hover {
-            background: #fff;
-            box-shadow: 0 0 30px rgba(255,255,255,0.15);
-            transform: translateY(-2px);
+        button.start-btn:active {
+            transform: scale(0.98);
+            background: #e0e0e0;
         }
 
         /* --- Dashboard --- */
         .dashboard {
             display: none;
             flex-direction: column;
-            gap: 3rem;
+            gap: 2rem;
+            width: 100%;
         }
 
         .dashboard.active {
             display: flex;
-            animation: fadeIn 1.5s ease;
+            animation: fadeIn 0.8s ease;
         }
 
+        /* 数据展示区 */
         .stats-grid {
             display: grid;
             grid-template-columns: 1fr 1fr;
-            gap: 2rem;
-            padding: 0 1rem;
+            gap: 12px;
         }
 
         .stat-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 1.5rem 1rem;
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
-            position: relative;
+            justify-content: center;
+            border: 1px solid #222;
         }
 
         .stat-value {
-            font-family: var(--font-en-deco);
-            font-size: 3.5rem;
-            font-weight: 400;
+            font-family: var(--font-num);
+            font-size: 2.4rem;
             color: #fff;
-            line-height: 1;
-            margin-bottom: 0.5rem;
-            text-shadow: 0 0 20px rgba(255,255,255,0.1);
-        }
-
-        .stat-unit {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            font-family: var(--font-serif);
-            letter-spacing: 1px;
-            position: absolute;
-            top: 5px;
-            right: -5px;
-            opacity: 0.6;
+            line-height: 1.1;
+            margin-bottom: 4px;
         }
 
         .stat-label {
             color: var(--text-muted);
-            font-size: 0.85rem;
-            letter-spacing: 2px;
+            font-size: 0.75rem;
+            letter-spacing: 1px;
             font-family: var(--font-serif);
-            opacity: 0.7;
         }
 
-        /* Progress Bar */
+        /* 进度条 */
         .life-progress-wrapper {
-            position: relative;
-            padding: 0 1rem;
+            padding: 0 5px;
         }
-
         .life-bar-container {
             width: 100%;
-            height: 1px;
+            height: 2px;
             background: #222;
-            margin-top: 1rem;
             position: relative;
-            overflow: visible;
         }
-
         .life-bar-fill {
-            height: 1px;
+            height: 100%;
             background: #fff;
             width: 0%;
-            transition: width 2s cubic-bezier(0.16, 1, 0.3, 1);
-            box-shadow: 0 0 15px rgba(255,255,255,0.6);
+            transition: width 1.5s ease;
             position: relative;
         }
-        
         .life-bar-fill::after {
             content: '';
             position: absolute;
-            right: 0;
-            top: 50%;
-            transform: translateY(-50%);
-            width: 4px;
-            height: 4px;
+            right: 0; top: -3px;
+            width: 8px; height: 8px;
             background: #fff;
             border-radius: 50%;
-            box-shadow: 0 0 10px #fff;
+            box-shadow: 0 0 8px rgba(255,255,255,0.8);
         }
-
         .time-labels {
             display: flex;
             justify-content: space-between;
-            margin-top: 12px;
-            font-size: 0.75rem;
-            color: #444;
+            margin-top: 8px;
+            font-size: 0.7rem;
+            color: #555;
             font-family: var(--font-serif);
-            letter-spacing: 2px;
         }
 
-        .quote-box {
-            font-family: var(--font-serif);
-            color: #999;
-            font-size: 0.95rem;
-            text-align: center;
-            line-height: 2;
-            padding: 2rem;
-            border-top: 1px solid var(--border-dim);
-            border-bottom: 1px solid var(--border-dim);
-            font-style: italic;
-            margin: 1rem 0;
-            background: linear-gradient(to right, transparent, rgba(255,255,255,0.01), transparent);
-        }
-
-        /* --- 3 Things System --- */
+        /* 每日三件事 - 移动端卡片式重构 */
         .tasks-section {
-            background: var(--glass);
-            padding: 2.5rem;
-            border-radius: 4px;
-            border: 1px solid var(--border-dim);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
 
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 2.5rem;
+            padding: 0 5px;
+            margin-bottom: 0.5rem;
         }
 
         .section-title {
             font-family: var(--font-display);
             font-size: 1.1rem;
             color: #eee;
-            letter-spacing: 2px;
         }
 
         .reset-btn {
-            background: none; 
-            border: none; 
-            color: #555; 
-            cursor: pointer; 
-            font-family: var(--font-serif); 
-            font-size: 0.85rem; 
-            letter-spacing: 1px;
-            transition: color 0.3s;
-            text-decoration: underline;
-            text-underline-offset: 4px;
+            background: none; border: none;
+            color: #666; font-size: 0.85rem;
+            padding: 8px; /* 增大点击区 */
         }
-        
-        .reset-btn:hover { color: #888; }
 
-        .task-row {
+        /* 单个任务卡片 */
+        .task-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 16px;
             display: flex;
-            gap: 20px;
+            flex-direction: column;
+            gap: 12px;
+            border: 1px solid #222;
+            transition: border-color 0.3s;
+        }
+
+        .task-card:focus-within {
+            border-color: #444;
+        }
+
+        .task-card-header {
+            display: flex;
+            justify-content: space-between;
             align-items: center;
-            margin-bottom: 2rem;
-            position: relative;
-        }
-        
-        .task-row:last-child { margin-bottom: 0; }
-
-        .task-number {
-            font-family: var(--font-en-deco);
-            color: #333;
-            font-size: 1.2rem;
-            width: 30px;
-            text-align: right;
         }
 
+        .task-label {
+            font-family: var(--font-num);
+            font-size: 0.9rem;
+            color: #444;
+        }
+
+        /* 输入框 - 全宽且易点击 */
         .task-input {
-            flex-grow: 1;
+            width: 100%;
             background: transparent;
             border: none;
             border-bottom: 1px solid #333;
-            color: #ddd;
+            color: #fff;
             padding: 8px 0;
-            font-size: 1rem;
+            font-size: 1.05rem; /* 16px以上防止iOS缩放 */
             font-family: var(--font-serif);
-            transition: all 0.4s ease;
+            border-radius: 0;
         }
-
         .task-input:focus {
             outline: none;
-            border-bottom-color: #888;
-            color: #fff;
+            border-color: #888;
         }
-        
-        .task-input::placeholder {
-            color: #333;
-            font-style: italic;
-            font-family: var(--font-serif);
-        }
+        .task-input::placeholder { color: #444; }
 
+        /* 选择框 - 按钮化样式 */
         .select-wrapper {
             position: relative;
-            display: flex;
-            align-items: center;
+            width: 100%;
         }
-
-        /* 自定义下拉箭头 */
+        
+        .category-select {
+            width: 100%;
+            appearance: none;
+            -webkit-appearance: none;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid #333;
+            color: #ccc;
+            padding: 10px 12px;
+            font-size: 0.9rem;
+            border-radius: 8px;
+            font-family: var(--font-serif);
+            text-align: center; /* 居中显示 */
+            text-align-last: center;
+        }
+        
         .select-wrapper::after {
-            content: '';
+            content: '▼';
+            font-size: 0.6rem;
+            color: #666;
             position: absolute;
             right: 12px;
             top: 50%;
-            width: 6px;
-            height: 6px;
-            border-right: 1px solid #555;
-            border-bottom: 1px solid #555;
-            transform: translateY(-70%) rotate(45deg);
+            transform: translateY(-50%);
             pointer-events: none;
-            transition: all 0.3s ease;
         }
 
-        .select-wrapper:hover::after {
-            border-color: #bbb;
-            transform: translateY(-50%) rotate(45deg);
-        }
+        /* 选中状态高亮 */
+        .category-select[data-val="maintenance"] { color: var(--color-m); border-color: #555; }
+        .category-select[data-val="optimization"] { color: var(--color-o); border-color: rgba(137, 180, 250, 0.3); }
+        .category-select[data-val="innovation"] { color: var(--color-i); border-color: rgba(249, 226, 175, 0.3); }
 
-        .category-select {
-            appearance: none;
-            -webkit-appearance: none;
-            background: rgba(255, 255, 255, 0.05);
-            color: #e0e0e0; /* 默认文字颜色大幅提亮 */
-            border: 1px solid #444;
-            padding: 8px 32px 8px 12px; /* 右侧留出箭头空间 */
-            font-size: 0.9rem; /* 字号加大 */
-            font-weight: 500; /* 字体加粗 */
-            cursor: pointer;
-            width: 110px;
-            text-align: left;
-            font-family: var(--font-serif);
-            letter-spacing: 1px;
-            transition: all 0.3s;
-            border-radius: 4px;
+        /* 底部操作区 */
+        .actions-area {
+            margin-top: 1rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
         }
-
-        /* 确保下拉菜单选项背景为深色，文字清晰 */
-        .category-select option {
-            background-color: #111;
-            color: #fff;
-        }
-        
-        .category-select:hover {
-            border-color: #888;
-            background: rgba(255, 255, 255, 0.1);
-            color: #fff;
-        }
-
-        .category-select:focus {
-            outline: none;
-            border-color: #aaa;
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        /* 针对不同值的颜色也进行了提亮适配 */
-        .category-select[data-val="maintenance"] { color: var(--color-m); border-color: #666; }
-        .category-select[data-val="optimization"] { color: var(--color-o); border-color: rgba(154, 195, 255, 0.5); }
-        .category-select[data-val="innovation"] { color: var(--color-i); border-color: rgba(255, 219, 142, 0.5); }
 
         .btn-save {
             width: 100%;
-            padding: 18px;
-            background: rgba(255,255,255,0.05);
-            color: #aaa;
-            border: 1px solid #333;
-            margin-top: 2rem;
-            font-family: var(--font-display);
-            font-size: 1rem;
-            letter-spacing: 4px;
-            transition: all 0.4s ease;
-            cursor: pointer;
-        }
-        
-        .btn-save:hover {
+            padding: 16px;
             background: #fff;
             color: #000;
-            border-color: #fff;
-            box-shadow: 0 0 30px rgba(255,255,255,0.2);
+            border: none;
+            border-radius: 12px;
+            font-family: var(--font-display);
+            font-size: 1rem;
+            letter-spacing: 2px;
+            font-weight: 600;
+            box-shadow: 0 4px 20px rgba(255,255,255,0.15);
         }
+        .btn-save:active { transform: scale(0.98); opacity: 0.9; }
 
-        .legend {
-            display: flex;
-            gap: 30px;
-            font-size: 0.75rem;
+        .reset-setup-link {
+            text-align: center;
             color: #444;
-            margin-top: 2rem;
-            justify-content: center;
-            font-family: var(--font-serif);
-            letter-spacing: 1px;
+            font-size: 0.8rem;
+            text-decoration: underline;
+            padding: 10px;
         }
 
-        .legend-item { display: flex; align-items: center; gap: 8px; }
-        .dot { width: 4px; height: 4px; background: currentColor; border-radius: 50%; }
-        .legend-item.m { color: var(--color-m); }
-        .legend-item.o { color: var(--color-o); }
-        .legend-item.i { color: var(--color-i); }
-        
-        /* Reset Setup Button */
-        .reset-setup-btn {
-            background: transparent;
-            border: 1px solid #333;
-            color: #666;
-            padding: 8px 16px;
-            font-size: 0.75rem;
-            margin-top: 3rem;
-            align-self: center;
-            cursor: pointer;
-            font-family: var(--font-serif);
-            transition: all 0.3s;
-            position: relative;
-            z-index: 10; /* 确保不被遮挡 */
-        }
-        
-        .reset-setup-btn:hover {
-            color: #aaa;
-            border-color: #666;
-        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-
-        /* Mobile Adjustments */
-        @media (max-width: 480px) {
-            body { padding: 40px 15px; }
-            .container { gap: 2rem; }
-            .stats-grid { gap: 1rem; }
-            .stat-value { font-size: 2.8rem; }
-            .tasks-section { padding: 1.5rem; }
-            .task-row { flex-wrap: wrap; gap: 10px; margin-bottom: 1.5rem; }
-            .task-number { display: none; }
-            .task-input { width: 100%; border-bottom: 1px solid #222; }
-            .select-wrapper { width: 100%; display: flex; justify-content: flex-end; }
-        }
     </style>
 </head>
 <body>
 
 <div class="container">
     <header>
-        <div class="divider"></div>
         <h1>向死而生</h1>
         <div class="subtitle">MEMENTO MORI</div>
     </header>
 
     <!-- SETUP SCREEN -->
     <div id="setupScreen" class="setup-box">
-        <p style="color: #999; margin-bottom: 2rem; font-family: var(--font-serif); font-size: 1rem; line-height: 1.8;">
-            请输入你的诞生日<br>
-            以确立时间的起点
+        <p style="color: #bbb; margin-bottom: 1.5rem; font-family: var(--font-serif); font-size: 1rem;">
+            时间的起点
         </p>
-        <div class="date-input-wrapper">
+        
+        <div class="date-input-container">
             <input type="date" id="birthdateInput" required>
         </div>
-        <button class="start-btn" onclick="initializeSystem()">确立起点</button>
+        
+        <button class="start-btn" onclick="initializeSystem()">开始倒数</button>
     </div>
 
     <!-- MAIN DASHBOARD -->
@@ -528,15 +401,13 @@
         <!-- Countdown Section -->
          <div class="stats-grid">
             <div class="stat-card">
-                <span class="stat-unit">天</span>
                 <span class="stat-value" id="daysLeft">0</span>
-                <span class="stat-label">余生之日</span>
+                <span class="stat-label">余生之日 (天)</span>
             </div>
 
             <div class="stat-card">
-                <span class="stat-unit">小时</span>
                 <span class="stat-value" id="productiveHours">0</span>
-                <span class="stat-label">清醒时刻</span>
+                <span class="stat-label">清醒时刻 (时)</span>
             </div>
         </div>
 
@@ -545,77 +416,78 @@
                 <div id="lifeBar" class="life-bar-fill"></div>
             </div>
             <div class="time-labels">
-                <span>生</span>
-                <span>死</span>
+                <span>BIRTH</span>
+                <span>DEATH</span>
             </div>
         </div>
 
-        <div class="quote-box">
-            “人生有两次生命，第二次开始于你意识到生命只有一次的那一刻。”
+        <div style="font-family: var(--font-serif); color: #666; font-size: 0.9rem; text-align: center; font-style: italic; padding: 0 1rem;">
+            “生命只有一次。”
         </div>
 
-        <!-- The 3 Things System -->
+        <!-- The 3 Things System (Mobile Cards) -->
         <div class="tasks-section">
             <div class="section-header">
                 <div class="section-title">今日核心</div>
                 <button onclick="clearTasks()" class="reset-btn">重置</button>
             </div>
 
-            <div class="task-input-group">
-                <!-- Task 1 -->
-                <div class="task-row">
-                    <span class="task-number">I</span>
-                    <input type="text" class="task-input" id="task1" placeholder="今日基石...">
-                    <div class="select-wrapper">
-                        <select class="category-select" id="cat1" onchange="updateColor(this)">
-                            <option value="maintenance">生存</option>
-                            <option value="optimization">进化</option>
-                            <option value="innovation">创造</option>
-                        </select>
-                    </div>
+            <!-- Task 1 -->
+            <div class="task-card">
+                <div class="task-card-header">
+                    <span class="task-label">I</span>
                 </div>
-                <!-- Task 2 -->
-                <div class="task-row">
-                    <span class="task-number">II</span>
-                    <input type="text" class="task-input" id="task2" placeholder="...">
-                    <div class="select-wrapper">
-                        <select class="category-select" id="cat2" onchange="updateColor(this)">
-                            <option value="maintenance">生存</option>
-                            <option value="optimization">进化</option>
-                            <option value="innovation">创造</option>
-                        </select>
-                    </div>
-                </div>
-                <!-- Task 3 -->
-                <div class="task-row">
-                    <span class="task-number">III</span>
-                    <input type="text" class="task-input" id="task3" placeholder="...">
-                    <div class="select-wrapper">
-                        <select class="category-select" id="cat3" onchange="updateColor(this)">
-                            <option value="maintenance">生存</option>
-                            <option value="optimization">进化</option>
-                            <option value="innovation">创造</option>
-                        </select>
-                    </div>
+                <input type="text" class="task-input" id="task1" placeholder="第一件最重要的事...">
+                <div class="select-wrapper">
+                    <select class="category-select" id="cat1" onchange="updateColor(this)">
+                        <option value="maintenance">生存 (维护)</option>
+                        <option value="optimization">进化 (改进)</option>
+                        <option value="innovation">创造 (突破)</option>
+                    </select>
                 </div>
             </div>
 
-            <button class="btn-save" onclick="saveAndGenerateCard()">铭刻 · 下载</button>
-
-            <div class="legend">
-                <div class="legend-item m"><div class="dot"></div> 生存</div>
-                <div class="legend-item o"><div class="dot"></div> 进化</div>
-                <div class="legend-item i"><div class="dot"></div> 创造</div>
+            <!-- Task 2 -->
+            <div class="task-card">
+                <div class="task-card-header">
+                    <span class="task-label">II</span>
+                </div>
+                <input type="text" class="task-input" id="task2" placeholder="第二件事...">
+                <div class="select-wrapper">
+                    <select class="category-select" id="cat2" onchange="updateColor(this)">
+                        <option value="maintenance">生存 (维护)</option>
+                        <option value="optimization">进化 (改进)</option>
+                        <option value="innovation">创造 (突破)</option>
+                    </select>
+                </div>
             </div>
+
+            <!-- Task 3 -->
+            <div class="task-card">
+                <div class="task-card-header">
+                    <span class="task-label">III</span>
+                </div>
+                <input type="text" class="task-input" id="task3" placeholder="第三件事...">
+                <div class="select-wrapper">
+                    <select class="category-select" id="cat3" onchange="updateColor(this)">
+                        <option value="maintenance">生存 (维护)</option>
+                        <option value="optimization">进化 (改进)</option>
+                        <option value="innovation">创造 (突破)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="actions-area">
+                <button class="btn-save" onclick="saveAndGenerateCard()">铭刻 · 下载日签</button>
+                <div class="reset-setup-link" onclick="resetSystem()">重置生日设定</div>
+            </div>
+
         </div>
-        
-        <!-- 重置设定按钮 -->
-        <button onclick="resetSystem()" class="reset-setup-btn">重置生日设定</button>
     </div>
 </div>
 
 <!-- Hidden Canvas for Image Generation -->
-<canvas id="mementoCanvas" width="800" height="1000" style="display:none;"></canvas>
+<canvas id="mementoCanvas" width="800" height="1200" style="display:none;"></canvas>
 
 <script>
     // Constants
@@ -635,7 +507,6 @@
 
     // Init
     window.onload = () => {
-        // Pre-load fonts for canvas
         document.fonts.ready.then(() => {
             const savedDate = localStorage.getItem(STORAGE_KEY_BIRTHDATE);
             if (savedDate) {
@@ -651,50 +522,34 @@
 
     function initializeSystem() {
         const dateVal = birthdateInput.value;
-        if (!dateVal) return alert("请确立时间的起点");
+        if (!dateVal) return alert("请选择日期");
         
         localStorage.setItem(STORAGE_KEY_BIRTHDATE, dateVal);
+        setupScreen.classList.remove('active');
         setupScreen.style.display = 'none';
+        
+        dashboard.style.display = 'flex';
         dashboard.classList.add('active');
-        dashboard.style.display = 'flex'; 
         calculateStats(dateVal);
     }
     
-    // 修改：重置系统功能，改为 DOM 操作而非刷新
     function resetSystem() {
-        if(confirm("确定要重置生日设定吗？")) {
+        if(confirm("重置生日？")) {
             localStorage.removeItem(STORAGE_KEY_BIRTHDATE);
-            
-            // 手动切换界面视图
-            dashboard.classList.remove('active');
-            dashboard.style.display = 'none';
-            
-            setupScreen.style.display = 'block';
-            setTimeout(() => setupScreen.classList.add('active'), 10);
-            
-            // 清空输入框以便重新输入
-            birthdateInput.value = '';
+            location.reload(); 
         }
     }
 
     function calculateStats(birthDateString) {
-        // 修复日期变多的BUG：统一使用本地时间午夜，消除UTC时区偏移导致的差异
-        // 解析 YYYY-MM-DD
         const parts = birthDateString.split('-');
-        // new Date(year, monthIndex, day) 创建的是本地时间的午夜 00:00:00
         const birthDate = new Date(parts[0], parts[1] - 1, parts[2]);
-        
-        // 将"今天"也设为本地时间的午夜 00:00:00，确保只计算完整天数差异
         const today = new Date();
         today.setHours(0, 0, 0, 0);
         
         const deathDate = new Date(birthDate);
         deathDate.setFullYear(birthDate.getFullYear() + EXPECTED_AGE);
 
-        const totalLifeMillis = deathDate - birthDate;
-        const livedMillis = today - birthDate;
         const remainingMillis = deathDate - today;
-
         const remainingDays = Math.floor(remainingMillis / (1000 * 60 * 60 * 24));
         
         if (remainingDays <= 0) {
@@ -705,31 +560,18 @@
         }
 
         const productiveHours = Math.floor(remainingDays * PRODUCTIVE_HOURS_PER_DAY);
-
+        
+        const totalLifeMillis = deathDate - birthDate;
+        const livedMillis = today - birthDate;
         let percentageLived = (livedMillis / totalLifeMillis) * 100;
         percentageLived = Math.min(100, Math.max(0, percentageLived));
 
-        animateValue(daysLeftEl, 0, remainingDays, 1500);
-        animateValue(productiveHoursEl, 0, productiveHours, 2000);
+        daysLeftEl.innerText = remainingDays.toLocaleString();
+        productiveHoursEl.innerText = productiveHours.toLocaleString();
         
         setTimeout(() => {
             lifeBar.style.width = percentageLived + "%";
-        }, 500);
-    }
-
-    function animateValue(obj, start, end, duration) {
-        let startTimestamp = null;
-        const step = (timestamp) => {
-            if (!startTimestamp) startTimestamp = timestamp;
-            const progress = Math.min((timestamp - startTimestamp) / duration, 1);
-            const easeProgress = 1 - Math.pow(1 - progress, 3);
-            
-            obj.innerHTML = Math.floor(easeProgress * (end - start) + start).toLocaleString();
-            if (progress < 1) {
-                window.requestAnimationFrame(step);
-            }
-        };
-        window.requestAnimationFrame(step);
+        }, 300);
     }
 
     function updateColor(selectElement) {
@@ -738,38 +580,24 @@
     }
 
     function saveAndGenerateCard() {
-        const t1 = document.getElementById('task1').value;
-        const t2 = document.getElementById('task2').value;
-        const t3 = document.getElementById('task3').value;
-        const c1 = document.getElementById('cat1').value;
-        const c2 = document.getElementById('cat2').value;
-        const c3 = document.getElementById('cat3').value;
-
         const tasks = [
-            { text: t1, type: c1 },
-            { text: t2, type: c2 },
-            { text: t3, type: c3 }
+            { text: document.getElementById('task1').value, type: document.getElementById('cat1').value },
+            { text: document.getElementById('task2').value, type: document.getElementById('cat2').value },
+            { text: document.getElementById('task3').value, type: document.getElementById('cat3').value }
         ];
         
         localStorage.setItem(STORAGE_KEY_TASKS, JSON.stringify(tasks));
         
-        // Visual Feedback
         const btn = document.querySelector('.btn-save');
         const originalText = btn.innerText;
-        btn.innerText = "正在铭刻...";
-        btn.style.background = "#fff";
-        btn.style.color = "#000";
+        btn.innerText = "生成中...";
+        btn.style.opacity = "0.7";
         
-        // Generate Card
         setTimeout(() => {
             generateCardImage(tasks);
             btn.innerText = "已下载";
-            
-            setTimeout(() => {
-                btn.innerText = originalText;
-                btn.style.background = "rgba(255,255,255,0.05)";
-                btn.style.color = "#aaa";
-            }, 3000);
+            btn.style.opacity = "1";
+            setTimeout(() => { btn.innerText = originalText; }, 3000);
         }, 500);
     }
 
@@ -777,105 +605,89 @@
         const ctx = mementoCanvas.getContext('2d');
         const width = mementoCanvas.width;
         const height = mementoCanvas.height;
-        const scale = 1;
 
-        // Background
-        const grad = ctx.createRadialGradient(width/2, 0, 0, width/2, height, height);
-        grad.addColorStop(0, '#1a1a1a');
-        grad.addColorStop(1, '#050505');
-        ctx.fillStyle = grad;
+        // Dark Background
+        ctx.fillStyle = "#050505";
         ctx.fillRect(0, 0, width, height);
         
-        // Decorative Border
-        ctx.strokeStyle = "rgba(255,255,255,0.1)";
-        ctx.lineWidth = 1;
-        ctx.strokeRect(40, 40, width - 80, height - 80);
+        // Inner Border
+        ctx.strokeStyle = "#333";
+        ctx.lineWidth = 2;
+        ctx.strokeRect(30, 30, width - 60, height - 60);
 
-        // Header Line
-        ctx.beginPath();
-        ctx.moveTo(width/2, 60);
-        ctx.lineTo(width/2, 100);
-        ctx.strokeStyle = "#444";
-        ctx.stroke();
-
-        // Title
+        // Header
         ctx.fillStyle = "#fff";
-        ctx.font = "500 50px 'Noto Serif SC', serif";
+        ctx.font = "bold 60px 'Noto Serif SC'";
         ctx.textAlign = "center";
-        ctx.letterSpacing = "10px";
-        ctx.fillText("向死而生", width / 2, 160);
+        ctx.fillText("向死而生", width / 2, 180);
         
-        // Subtitle
         ctx.fillStyle = "#666";
-        ctx.font = "18px 'Cinzel', serif";
-        ctx.fillText("MEMENTO MORI", width / 2, 200);
+        ctx.font = "30px 'Cinzel'";
+        ctx.fillText("MEMENTO MORI", width / 2, 240);
 
         // Date
-        const today = new Date().toLocaleDateString('zh-CN', { year: 'numeric', month: 'long', day: 'numeric' });
+        const today = new Date().toLocaleDateString('zh-CN');
         ctx.fillStyle = "#444";
-        ctx.font = "16px 'Noto Serif SC', serif";
-        ctx.fillText(today, width / 2, 240);
+        ctx.font = "24px 'Noto Serif SC'";
+        ctx.fillText(today, width / 2, 300);
 
-        // Stats Area
+        // Stats
         const days = document.getElementById('daysLeft').innerText;
-        
         ctx.fillStyle = "#fff";
-        ctx.font = "400 100px 'Cinzel', serif";
-        ctx.fillText(days, width / 2, 380);
+        ctx.font = "120px 'Cinzel'";
+        ctx.fillText(days, width / 2, 480);
         
-        ctx.fillStyle = "#666";
-        ctx.font = "16px 'Noto Serif SC', serif";
-        ctx.fillText("剩余天数", width / 2, 420);
+        ctx.fillStyle = "#888";
+        ctx.font = "24px 'Noto Serif SC'";
+        ctx.fillText("余生之日", width / 2, 530);
 
-        // Divider
+        // Line
+        ctx.strokeStyle = "#333";
         ctx.beginPath();
-        ctx.moveTo(150, 480);
-        ctx.lineTo(width - 150, 480);
-        ctx.strokeStyle = "#222";
+        ctx.moveTo(100, 580);
+        ctx.lineTo(width-100, 580);
         ctx.stroke();
 
-        // Tasks Area
-        const startY = 580;
-        const lineHeight = 100;
-        
+        // Tasks
+        let startY = 700;
         ctx.textAlign = "left";
         
         tasks.forEach((task, index) => {
-            const y = startY + (index * lineHeight);
-            
-            // Task Number
-            ctx.fillStyle = "#333";
-            ctx.font = "40px 'Cinzel', serif";
             const roman = ["I", "II", "III"];
-            ctx.fillText(roman[index], 100, y);
-
-            // Task Content
-            ctx.fillStyle = task.text ? "#e0e0e0" : "#333";
-            ctx.font = "400 32px 'Noto Serif SC', serif";
-            let text = task.text || "......";
-            if (text.length > 20) text = text.substring(0, 20) + "...";
-            ctx.fillText(text, 180, y);
             
-            // Category Tag
-            let color = "#444";
-            let catText = "生存";
-            if(task.type === 'optimization') { color = "#7aa2f7"; catText = "进化"; }
-            if(task.type === 'innovation') { color = "#e0af68"; catText = "创造"; }
+            // Number
+            ctx.fillStyle = "#333";
+            ctx.font = "bold 40px 'Cinzel'";
+            ctx.fillText(roman[index], 80, startY);
+
+            // Text
+            ctx.fillStyle = task.text ? "#e0e0e0" : "#333";
+            ctx.font = "36px 'Noto Serif SC'";
+            let text = task.text || "......";
+            if(text.length > 20) text = text.substring(0, 19) + "...";
+            ctx.fillText(text, 160, startY);
+            
+            // Tag
+            let color = "#666";
+            let tag = "生存";
+            if(task.type === 'optimization') { color = "#89b4fa"; tag = "进化"; }
+            if(task.type === 'innovation') { color = "#f9e2af"; tag = "创造"; }
             
             ctx.fillStyle = color;
-            ctx.font = "14px 'Noto Serif SC', serif";
-            ctx.fillText(catText, 180, y + 30);
+            ctx.font = "24px 'Noto Serif SC'";
+            ctx.fillText(tag, 160, startY + 40);
+            
+            startY += 120;
         });
 
         // Footer
         ctx.fillStyle = "#333";
-        ctx.font = "12px 'Noto Serif SC', serif";
+        ctx.font = "20px sans-serif";
         ctx.textAlign = "center";
-        ctx.fillText("埃隆·马斯克效率系统", width / 2, height - 60);
+        ctx.fillText("Elon's Efficiency Method", width / 2, height - 50);
 
-        // Download
         const link = document.createElement('a');
-        link.download = `Memento_Mori_${new Date().toISOString().split('T')[0]}.png`;
+        link.download = `Memento_Mori_${Date.now()}.png`;
         link.href = mementoCanvas.toDataURL();
         link.click();
     }
@@ -884,7 +696,6 @@
         const saved = localStorage.getItem(STORAGE_KEY_TASKS);
         if (saved) {
             const tasks = JSON.parse(saved);
-            
             [0,1,2].forEach(i => {
                 if(tasks[i]) {
                     document.getElementById(`task${i+1}`).value = tasks[i].text;
@@ -898,13 +709,9 @@
     }
 
     function clearTasks() {
-        if(confirm("确定要抹去今日的记录吗？")) {
+        if(confirm("清除所有任务？")) {
             localStorage.removeItem(STORAGE_KEY_TASKS);
-            document.querySelectorAll('.task-input').forEach(i => i.value = '');
-            document.querySelectorAll('.category-select').forEach(s => {
-                s.value = 'maintenance';
-                updateColor(s);
-            });
+            location.reload();
         }
     }
 </script>
